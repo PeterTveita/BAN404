@@ -1,0 +1,22 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Notebooks
+.ipynb_checkpoints/
+
+# Conda
+env/
+venv/
+.conda/
+
+# Mac
+.DS_Store
+
+# VS Code
+.vscode/
+
+# Data
+data/

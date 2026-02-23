@@ -1,0 +1,16 @@
+name: BAN404
+channels:
+  - conda-forge
+dependencies:
+  - python=3.11
+  - numpy
+  - pandas
+  - matplotlib
+  - seaborn
+  - scikit-learn
+  - statsmodels
+  - jupyterlab
+  - pip
+  - pip:
+      - ISLP
+
