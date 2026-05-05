@@ -1,0 +1,29 @@
+---
+title: "Exercises lecture 14"
+format: html
+---
+
+## Exercise 12.9
+
+```{python}
+# Read libraries
+import numpy as np
+import pandas as pd
+import matplotlib.pyplot as plt
+from statsmodels.datasets import get_rdataset
+from sklearn.decomposition import PCA
+```
+
+```{python}
+# Read data
+USArrests = get_rdataset("USArrests").data
+print(USArrests.describe())
+```
+
+## Exercise 12.9
+
+```{python}
+from sklearn.cluster import AgglomerativeClustering
+from scipy.cluster.hierarchy import linkage, dendrogram, cut_tree
+from ISLP.cluster import compute_linkage
+```
