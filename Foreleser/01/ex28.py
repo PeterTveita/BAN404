@@ -54,3 +54,4 @@ for ax, var in zip(axs.flat,["Top10perc", "Apps", "Enroll","S.F.Ratio"]):
     ax.set_xlabel(var)
     ax.set_ylabel('Outstate')
 
+plt.show()
