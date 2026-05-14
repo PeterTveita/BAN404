@@ -1,6 +1,6 @@
 # Context: BAN404 — Introduction to Machine Learning
 
-**Last updated:** 2026-05-07 (session 3)
+**Last updated:** 2026-05-14 (session 4)
 **Status:** In progress
 
 ---
@@ -19,6 +19,7 @@ BAN404 course at NHH. Uses ISLP (Introduction to Statistical Learning with Pytho
 - Exercise 3.8 (Auto-datasettet): (a)–(c) fullført ✅
 - Tutorial 1, Task 1 (a)–(e): fullført ✅
 - Tutorial 1, Task 2: ikke påbegynt
+- Exercise 4.13 (Weekly-datasettet): (a)–(h) fullført ✅, (i) og (j) gjenstår
 
 ## Progress Log
 | Date | Update |
@@ -35,6 +36,15 @@ BAN404 course at NHH. Uses ISLP (Introduction to Statistical Learning with Pytho
 | 2026-05-07 | Tutorial 1, Task 1 (e): diskutert metodevalg — lineær regresjon foretrukket ved lineært mønster |
 | 2026-05-07 | Grundig gjennomgang av begreper: varians, standardavvik, nullhypotese, p-verdi, statistisk signifikans, konfidensintervall |
 | 2026-05-07 | Opprettet oppsummeringsfil: `Foreleser/Tutorial 1/statistikk_begreper.md` |
+| 2026-05-14 | Exercise 4.13 (a): lastet Weekly-datasettet, korrelasjonsmatrise og plott fullført |
+| 2026-05-14 | Exercise 4.13 (b): logistisk regresjon med alle lag + Volume — kun Lag2 signifikant (p=0.030) |
+| 2026-05-14 | Exercise 4.13 (c): confusion matrix og accuracy (56.11%) — modellen sier nesten alltid Up |
+| 2026-05-14 | Exercise 4.13 (d): logistisk regresjon med Lag2, train 1990–2008, test 2009–2010 → 62.50% |
+| 2026-05-14 | Exercise 4.13 (e): LDA med Lag2 → 62.50% (identisk med logistisk regresjon) |
+| 2026-05-14 | Exercise 4.13 (f): QDA med Lag2 → 58.65% |
+| 2026-05-14 | Exercise 4.13 (g): KNN K=1 med Lag2 → 50.00% (overfitting) |
+| 2026-05-14 | Exercise 4.13 (h): Naive Bayes med Lag2 → 59.00% |
+| 2026-05-14 | Gjennomgått Positron-innstillinger: inline suggestions, extension bisect, conda-miljø BAN404 |
 
 ## Decisions Made
 - Bruker `index_col=0` eller `college3`-metoden for å sette universitetsnavnene som radnavn i College-datasettet
@@ -45,9 +55,12 @@ BAN404 course at NHH. Uses ISLP (Introduction to Statistical Learning with Pytho
 - Exercise 2.8 (h): utforsk datasettet fritt og kommenter funn — ikke påbegynt
 - Exercise 3.9 og 3.10 ikke påbegynt
 - Tutorial 1, Task 2: ikke påbegynt (College-datasettet, train/test split, MSE, KNN)
+- Exercise 4.13 (i): sammenligne alle metoder og velge beste — gjenstår
+- Exercise 4.13 (j): eksperimentere med ulike prediktor-kombinasjoner og K-verdier — gjenstår
 
 ## Key Files & Resources
 - `Pensum/ISLP.pdf` — pensumbok
+- `Foreleser/03/ex4.13.ipynb` — løsning Exercise 4.13 (Weekly) — (a)–(h) ferdig
 - `Foreleser/01/ex28_solution.ipynb` — løsning Exercise 2.8 (College)
 - `Foreleser/01/ex28.py` — foreleserens løsning Exercise 2.8
 - `Foreleser/02/ex38.ipynb` — løsning Exercise 3.8 (Auto) — under arbeid
@@ -66,3 +79,11 @@ BAN404 course at NHH. Uses ISLP (Introduction to Statistical Learning with Pytho
 - Forstår nå: varians, standardavvik, nullhypotese, p-verdi, statistisk signifikans, konfidensintervall, korrelasjon ≠ kausalitet
 - Forstår forskjellen på array, liste og DataFrame — og hvorfor NumPy vektorisering brukes
 - Forstår intuisjonen bak KNN (lav vs. høy K, overfit/underfit, outliers, ekstrapolasjon)
+- Forstår logistisk regresjon: sigmoid-funksjon, log-odds, koeffisienter, p-verdier, konfidensintervall, std err
+- Forstår confusion matrix og accuracy
+- Forstår forskjellen mellom in-sample og out-of-sample evaluering
+- Forstår LDA, QDA, KNN, Naive Bayes på konseptuelt nivå
+- Forstår overfitting (lav K) vs underfitting (høy K) i KNN
+- BAN404-miljø i conda er konfigurert og verifisert — bruker `conda activate BAN404`
+- Quarto-extension deaktivert i Positron (forårsaket backspace-problem)
+- Inline suggestions slått av for workspace i Positron
