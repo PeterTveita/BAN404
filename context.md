@@ -1,6 +1,6 @@
 # Context: BAN404 — Introduction to Machine Learning
 
-**Last updated:** 2026-05-16 (session 12)
+**Last updated:** 2026-05-18 (session 17)
 **Status:** In progress
 
 ---
@@ -37,6 +37,9 @@ BAN404 course at NHH. Uses ISLP (Introduction to Statistical Learning with Pytho
 - Tutorial 3, Task 2c: regression spline med 2 knutepunkter (ξ=3, ξ=6) manuelt ✅
 - Tutorial 3, Task 2d: BSpline fra ISLP.transforms — identisk med c) ✅
 - Tutorial 3, Task 2e: LOO-kryss-validering for ulike knutepunktkombinasjoner ✅ — beste: (3.5, 5.5)
+- Tutorial 4: alle oppgaver fullført ✅ (Task 1a–b: clustering, Task 2a–d: regression trees, Task 3a–c: RF + boosting)
+- Tutorial 2 (exercise2.2.ipynb — studentens fil): debugget og forstått ✅
+- Tutorial 3 (exercise3.2.ipynb — studentens fil): påbegynt — Task 1a (split) og delvis 1b (Ridge) i gang
 
 ## Progress Log
 | Date | Update |
@@ -100,6 +103,32 @@ BAN404 course at NHH. Uses ISLP (Introduction to Statistical Learning with Pytho
 | 2026-05-16 | Tutorial 2 Task 4: validation set 50/50 + LOO på Auto — age og weight som signifikante prediktorer |
 | 2026-05-16 | Tutorial 3 Task 1 (a)–(d): split med np.setdiff1d, OLS/Ridge/Lasso, RidgeCV/LassoCV (cv=5), koeffisientsammenligning |
 | 2026-05-16 | Tutorial 3 Task 2 (a)–(e): polynomregresjon K=7, regression spline manuelt, BSpline fra ISLP, LOO for knutepunkter — beste: (3.5, 5.5) |
+| 2026-05-17 | Tutorial 4 Task 1a påbegynt: K-means clustering (k=3) på Iris — StandardScaler, KMeans, pd.crosstab for sammenligning mot faktiske arter |
+| 2026-05-18 | Tutorial 4 Task 1b fullført: hierarkisk clustering (complete linkage), dendrogram, cut_tree — lignende resultater som K-means |
+| 2026-05-18 | Tutorial 4 Task 2a fullført: manuell RSS-minimering (minimize_scalar) for Years og Hits — Years vinner med s≈4.5 |
+| 2026-05-18 | Tutorial 4 Task 2b fullført: DecisionTreeRegressor(min_samples_leaf=15, max_depth=3), plot_tree |
+| 2026-05-18 | Tutorial 4 Task 2c fullført: prediksjon ny obs (Hits=125, Years=2.5) med np.exp for å konvertere fra logSalary |
+| 2026-05-18 | Tutorial 4 Task 2d fullført: R² manuelt (TSS/RSS) og .score() for tree1 og tree2 med get_dummies |
+| 2026-05-18 | Tutorial 4 Task 3a fullført: testMAD for tree1 (0.367) og tree2 (0.449) på testsettet |
+| 2026-05-18 | Tutorial 4 Task 3b fullført: RandomForestRegressor(n_estimators=500, max_features=6) — MAD=0.299, variable importance plot |
+| 2026-05-18 | Tutorial 4 Task 3c fullført: GradientBoostingRegressor(n_estimators=1000, lr=0.01, max_depth=2) — MAD=0.293 |
+| 2026-05-18 | Eksamensinformasjon fra foreleser: neural networks = kun MLPRegressor fra sklearn (ikke torch, ikke CNN/RNN) |
+| 2026-05-18 | Eksamensinformasjon fra foreleser: deskriptiv statistikk er kontekstavhengig — scatter, boxplot, krysstabell |
+| 2026-05-18 | Mål: lage ett cheatsheet med all faglig informasjon for å printe og ta med på eksamen |
+| 2026-05-18 | Laget Positron code snippets for alle BAN404-metoder — samlet i BAN404.code-snippets (15 snippets) |
+| 2026-05-18 | Lagt til confusion_matrix og ConfusionMatrixDisplay i BAN404-snippet og exercise3.2.ipynb |
+| 2026-05-18 | Debugget exercise2.2.ipynb: familiy→family, print(m1.summary)→print(m1.summary()), K=20 for liten data, list→np.array |
+| 2026-05-18 | Forstår sm.add_constant-regler: påkrevd i sm.OLS/GLM/GLS, ikke i smf.ols (formel-API) og aldri i sklearn |
+| 2026-05-18 | Forstår polynomregresjon (np.vander, K=7 med n=8 = perfekt fit, ekstrem overfitting) |
+| 2026-05-18 | Forstår kubisk regresjonsspline: h(x,ξ)-funksjon, np.column_stack, 4+K parametere, BSpline fra ISLP identisk |
+| 2026-05-18 | Startet exercise3.2.ipynb — fikset ytrain = train.iloc[:, 0].values (ikke 0:) |
+| 2026-05-18 | Gjennomgått typisk eksamensinnhold: train/test + Ridge/Lasso + bootstrap + GAM er kjernen |
+| 2026-05-18 | Eksamenstrening oppgave 1 (2025, Python-versjon): Ridge, LOO-CV, bootstrap, GAM gjennomgått |
+| 2026-05-18 | Forstår Ridge: objektivfunksjon, demeaning, scipy.optimize.minimize vs analytisk løsning |
+| 2026-05-18 | Forstår LOO-CV for Ridge: g_fast med np.linalg.solve, subsett for ytelse |
+| 2026-05-18 | Forstår Bootstrap: trekk med tilbakelegging, samplingsfordeling, persentil-KI |
+| 2026-05-18 | Forstår GAM med BSpline: identifisere ikke-linearitet med scatter + delta R², spline basis |
+| 2026-05-18 | Forstår bias-variance trade-off dypt: NHH-analogi, bias=systematisk feil, varians=spredning mellom datasett |
 | 2026-05-16 | Forstår OLS/Ridge/Lasso: RSS, L1/L2-straff, marginal kostnad, shrinkage, variabelseleksjon, bias-variance tradeoff |
 | 2026-05-16 | Forstår CV: k-fold deler treningsdata i k deler, roterer valideringsdel, velger beste α uten å røre testsettet |
 | 2026-05-16 | Forstår regression splines: cubic spline basis, h-funksjon, knutepunkter, 4+K parametere |
@@ -132,7 +161,9 @@ BAN404 course at NHH. Uses ISLP (Introduction to Statistical Learning with Pytho
 - `X_test.reindex(columns=X_train.columns, fill_value=1)` — sikrer samme kolonner (inkl. const) i LOO
 
 ## Exam Cheat-Sheet Topics
-*(Samles her — formateres til ferdig ark senere)*
+*(Samles her — skal formateres til ferdig printbart ark)*
+**Mål:** Ett kompakt ark med all faglig informasjon som kan printes og tas med på eksamen.
+
 
 ### Logistisk regresjon — teori
 - Formel: P(Y=1|X=x) = 1 / (1 + e^(−β0 − β1·x))
@@ -147,6 +178,29 @@ BAN404 course at NHH. Uses ISLP (Introduction to Statistical Learning with Pytho
 - Lav K → overfit (følger støy), høy K → underfit (for glatt)
 - Bryter uavgjort med lavest indeks (argsort-rekkefølge)
 - Gjennomsnittet av 0-er og 1-er er alltid mellom 0 og 1 → kan tolkes som sannsynlighet
+
+### ⚠️ Når må du legge til `sm.add_constant()`?
+
+| Bibliotek | Metode | add_constant nødvendig? |
+|---|---|---|
+| statsmodels | `sm.OLS`, `sm.GLM`, `sm.GLS` | **JA** — alltid |
+| statsmodels | `smf.ols('y ~ x', data=df)` | **NEI** — formula API gjør det automatisk |
+| sklearn | Ridge, Lasso, KNN, LDA, QDA, MLPRegressor, osv. | **NEI** — `fit_intercept=True` er default |
+
+**Viktig:** Manglende `add_constant` gir ingen feilmelding — modellen kjører, men gir **gale koeffisienter** uten advarsel.
+
+```python
+# RIKTIG — statsmodels uten formel:
+X = sm.add_constant(x)
+m = sm.GLM(y, X, family=sm.families.Binomial()).fit()
+
+# RIKTIG — statsmodels med formel (ingen add_constant):
+m = smf.ols('y ~ x', data=df).fit()
+
+# RIKTIG — sklearn (ingen add_constant):
+ridge = skm.Ridge(alpha=1000)
+ridge.fit(X_train, y_train)
+```
 
 ### GLM — teori
 - Generalized Linear Model: samlebetegnelse
@@ -240,6 +294,268 @@ auto['y'] = np.where(auto['mpg'] > auto['mpg'].median(), 'high', 'low')
 auto['y'] = auto['y'].astype('category')
 ```
 
+### Clustering — teori
+- **K-means:** velg K, tilordne til nærmeste sentroid, oppdater sentroider, gjenta. Krever StandardScaler. Ikke-deterministisk (n_init=10 for stabilitet)
+- **Hierarkisk (agglomerativ):** start med n clusters, slå sammen to nærmeste om gangen. Resulterer i dendrogram. Ingen K på forhånd
+- **Complete linkage:** avstand mellom clusters = max avstand mellom punktpar. Gir kompakte grupper
+- **Dendrogram:** y-akse = avstand ved sammenslåing. Horisontalt kutt ved K gir K clusters. Store hopp = naturlige skiller
+- **cut_tree:** kutter dendrogram ved ønsket K, returnerer cluster-tilhørighet for hver obs
+
+### Clustering — nøkkelkode
+```python
+# K-means
+scaler = StandardScaler()
+X_scaled = scaler.fit_transform(X)
+km = KMeans(n_clusters=3, random_state=1, n_init=10)
+km.fit(X_scaled); labels = km.labels_
+pd.crosstab(labels, y)
+
+# Hierarkisk
+hc = AgglomerativeClustering(distance_threshold=0, n_clusters=None, linkage='complete')
+hc.fit(X); linkage_mat = compute_linkage(hc)
+dendrogram(linkage_mat, no_labels=True)
+clusters = cut_tree(linkage_mat, n_clusters=3).reshape(-1)
+```
+
+### Regresjons-trær — teori
+- Splitter prediktorrommets rekursivt i rektangler. Prediksjon = gjennomsnitt av y i region
+- **Første split:** finn variabel X_j og kuttepunkt s som minimerer RSS = Σ(y−ȳ_R1)² + Σ(y−ȳ_R2)²
+- Ubegrenset tre → overfitter (samples=1 i blader, R²=1)
+- Begrens med `min_samples_leaf` og `max_depth`
+- **R²** = (TSS−RSS)/TSS. TSS = Σ(y−ȳ)², RSS = Σ(y−ŷ)²
+
+### Regresjons-trær — nøkkelkode
+```python
+# Manuell første split
+def RSS(s, x1, y):
+    yR1 = y[x1 < s].mean(); yR2 = y[x1 >= s].mean()
+    return ((y[x1<s]-yR1)**2).sum() + ((y[x1>=s]-yR2)**2).sum()
+res = minimize_scalar(RSS, bounds=(0,50), args=(x1, y), method='bounded')
+
+# DecisionTreeRegressor
+tree = DecisionTreeRegressor(min_samples_leaf=15, max_depth=3, random_state=0)
+tree.fit(X_train, y_train)
+tree.predict(X_test)
+tree.score(X_train, y_train)  # R²
+
+# R² manuelt
+TSS = ((y - y.mean())**2).sum()
+RSS = ((y - tree.predict(X))**2).sum()
+R2 = (TSS - RSS) / TSS
+```
+
+### MAD (Mean Absolute Deviation)
+- MAD = mean(|y − ŷ|) — gjennomsnittlig absolutt avvik
+- Mindre sensitiv for ekstreme feil enn MSE
+```python
+def MAD(y, pred): return np.mean(np.abs(y - pred))
+```
+
+### Random Forest og Boosting — teori
+| Metode | Trær | Strategi | Nøkkelparameter |
+|---|---|---|---|
+| Enkelt tre | 1 | Rekursiv splitting | min_samples_leaf, max_depth |
+| Bagging | Mange | Bootstrap + gjennomsnitt | n_estimators |
+| Random Forest | Mange | Bootstrap + tilfeldig m prediktorer | max_features |
+| Boosting | Mange | Sekvensielt på residualer | learning_rate, n_estimators |
+
+- **Random Forest:** `max_features=m` → kun m prediktorer vurderes per split → trærne ukorrelerte
+- **Boosting:** lav learning_rate + mange svake trær → gradvis forbedring
+
+### Random Forest og Boosting — nøkkelkode
+```python
+# Forbered data med dummies
+X2train = train.drop(columns=['Salary','logSalary'])
+X2train = pd.get_dummies(X2train, drop_first=True)
+
+# Random Forest
+rf = RandomForestRegressor(n_estimators=500, max_features=6, random_state=123)
+rf.fit(X2train, y_train)
+importances = pd.Series(rf.feature_importances_, index=X2train.columns)
+importances.sort_values().plot.barh()
+
+# Boosting
+boost = GradientBoostingRegressor(n_estimators=1000, learning_rate=0.01,
+                                   max_depth=2, random_state=123)
+boost.fit(X2train, y_train)
+```
+
+### Ridge-regresjon — teori
+- Minimerer: RSS + α · sum(β²)  ←  L2-straff
+- Høy α → koeffisienter krympes mot null (men aldri eksakt null)
+- α=0 → identisk med OLS
+- sklearn håndterer standardisering og intercept automatisk (fit_intercept=True som default)
+- Optimal α velges med RidgeCV (k-fold CV)
+- Bias-variance: α opp → mer bias, mindre varians → lavere test-MSE når data er støyfull
+
+### Ridge-regresjon — kode (forelesers metode)
+```python
+import sklearn.linear_model as skm
+
+# Fit med gitt alpha
+Ridge = skm.Ridge(alpha=10000)
+Ridge.fit(X_train, y_train)
+print(Ridge.coef_)                          # Koeffisienter (uten intercept)
+
+result_Ridge = Ridge.predict(X_test)
+MSE_Ridge = ((y_test - result_Ridge)**2).mean()
+
+# Finn optimal alpha med RidgeCV (k-fold)
+alphas    = np.logspace(-6, 6, 100)
+Ridge_CV  = skm.RidgeCV(alphas=alphas, cv=5)
+Ridge_CV.fit(X_train, y_train)
+print(f"Optimal alpha: {Ridge_CV.alpha_:.4f}")
+
+# Fit med optimal alpha
+Ridge_opt = skm.Ridge(alpha=Ridge_CV.alpha_)
+Ridge_opt.fit(X_train, y_train)
+MSE_opt   = ((y_test - Ridge_opt.predict(X_test))**2).mean()
+```
+
+### Ridge-regresjon — manuell utregning uten pakker
+```python
+# Analytisk løsning: b = (X'X + αI)^{-1} X'y
+# (sklearn gjør dette internt — her vises mekanismen)
+Xc = np.column_stack([np.ones(len(X)), X])  # legg til intercept-kolonne
+alpha = 10
+p  = Xc.shape[1]
+A  = Xc.T @ Xc + alpha * np.eye(p)         # (X'X + αI)
+b  = Xc.T @ y                              # X'y
+b_ridge = np.linalg.solve(A, b)            # Løs lineært system
+y_pred  = Xc @ b_ridge
+mse     = np.mean((y - y_pred)**2)
+```
+
+### Bootstrap — teori
+- Simulerer samplingsfordeling uten ny data
+- Trekk n obs med tilbakelegging fra datasettet → beregn statistikken → gjenta B ganger
+- Gir B verdier av statistikken → dette ER samplingsfordelingen
+- 95% KI: persentil-metoden → [2.5%, 97.5%] av bootstrap-verdiene
+- ddof=1 i np.var → S² (stikkprøvevarians, deler på n-1, upartisk)
+
+### Bootstrap — kode (for varians)
+```python
+np.random.seed(42)
+n = len(y);  B = 1000
+boot_vars = np.array([
+    np.var(y[np.random.choice(n, n, replace=True)], ddof=1)
+    for _ in range(B)
+])
+ci_low, ci_high = np.percentile(boot_vars, [2.5, 97.5])
+plt.hist(boot_vars, bins=40)
+plt.axvline(np.var(y, ddof=1), color='red', linestyle='--')
+```
+
+### Bootstrap — manuell utregning
+```python
+# Én bootstrap-iterasjon for hånd:
+idx      = np.random.choice(n, n, replace=True)   # Trekk med tilbakelegging
+y_boot   = y[idx]                                  # Bootstrap-stikkprøve
+s2_boot  = np.sum((y_boot - np.mean(y_boot))**2) / (n - 1)  # S² manuelt
+# Gjenta B ganger og samle s2_boot-verdiene
+```
+
+### GAM med BSpline — teori
+- Generalisert additiv modell: y = b0 + f1(x1) + f2(x2) + ... + fq(xq)
+- Hver fj kan være ikke-lineær (spline, polynom, KNN-smoother)
+- Identifiser ikke-lineære variabler: sammenlign lineær R² vs. kvadratisk R²
+  - Stor delta R² → variabelen er ikke-lineær → bruk spline
+- BSpline: cubic spline basis med interne knutepunkter
+- GAM gir lavere trenings-MSE enn OLS hvis ikke-lineære sammenhenger finnes
+
+### GAM med BSpline — kode (forelesers metode)
+```python
+from ISLP.transforms import BSpline
+
+# Identifiser ikke-linearitet
+for i, col in enumerate(var_names):
+    xi     = X[:, i]
+    r2_lin  = sm.OLS(y, sm.add_constant(xi)).fit().rsquared
+    r2_quad = sm.OLS(y, sm.add_constant(
+                  np.column_stack([xi, xi**2]))).fit().rsquared
+    print(f"{col}: delta R² = {r2_quad - r2_lin:.3f}")
+
+# Splines for ikke-lineære variabler (f.eks. x2 og x3)
+bs2 = BSpline(internal_knots=[-1, 0, 1], degree=3, intercept=False)
+X2_sp = bs2.fit_transform(X[:, 1].reshape(-1, 1))
+
+# Sett sammen GAM-designmatrise
+X_gam = np.column_stack([np.ones(len(y)), X[:, 0], X2_sp, X[:, 2]])
+gam   = sm.OLS(y, X_gam).fit()
+
+# MSE og R²
+mse_gam = np.mean((y - gam.predict(X_gam))**2)
+r2_gam  = 1 - mse_gam / np.var(y, ddof=1)
+```
+
+### GAM — manuell utregning uten pakker
+```python
+# Kubisk spline manuelt (ett knutepunkt ξ):
+def h(x, xi): return np.maximum((x - xi)**3, 0)
+
+xi = 0.0
+X_spline = np.column_stack([
+    np.ones(len(x)), x, x**2, x**3, h(x, xi)
+])
+model = sm.OLS(y, X_spline).fit()
+mse   = np.mean((y - model.predict(X_spline))**2)
+r2    = 1 - mse / np.var(y, ddof=1)
+```
+
+### Polynomregresjon — designmatrise med np.vander
+```python
+# Grad K=7 → 8 kolonner: [1, x, x², x³, x⁴, x⁵, x⁶, x⁷]
+X = np.vander(x, K + 1, increasing=True)  # K+1 kolonner, inkl. intercept
+model = sm.OLS(y, X).fit()                # intercept allerede i X → ingen add_constant
+y_pred = model.predict(X)
+```
+- `np.vander(x, 8, increasing=True)` gir Vandermonde-matrise med 8 kolonner
+- Intercept er inkludert i kolonnen av enere → **ikke** bruk `sm.add_constant()`
+- K=7 med n=8 → 8 parametere, 8 obs → **perfekt fit** (R²=1, RSS=0) — ekstrem overfitting
+
+### Kubisk regresjonsspline — manuell og BSpline
+
+**Manuelt (h-funksjon):**
+```python
+def h(x, xi):
+    return np.where(x > xi, (x - xi)**3, 0)  # truncated cubic
+
+# To knutepunkter ξ₁=3, ξ₂=6 → 6 kolonner: [1, x, x², x³, h(x,3), h(x,6)]
+X_spline = np.column_stack([
+    np.ones_like(x), x, x**2, x**3,
+    h(x, 3), h(x, 6)
+])
+model_spline = sm.OLS(y, X_spline).fit()
+y_pred = model_spline.predict(X_spline)
+```
+
+**Med BSpline fra ISLP (gir identiske prediksjoner):**
+```python
+from ISLP.transforms import BSpline
+bs = BSpline(internal_knots=[3, 6], degree=3, intercept=True)
+X_bs = bs.fit_transform(x.reshape(-1, 1))
+model_bs = sm.OLS(y, X_bs).fit()
+
+# Verifiser at de er like:
+print(np.allclose(model_spline.predict(X_spline), model_bs.predict(X_bs)))  # True
+```
+- Kubisk spline med K knutepunkter → **4 + K parametere**
+- `intercept=True` i BSpline er nødvendig for å matche manuell basis
+- Intercept er inkludert i basis → **ikke** bruk `sm.add_constant()`
+
+### Neural Networks (MLPRegressor) — teori
+- Kun `MLPRegressor` fra `sklearn.neural_network` er pensum (ikke torch, ikke CNN/RNN)
+- Skjult lag: K lineærkombinasjoner kjørt gjennom aktivasjonsfunksjon (ReLU eller sigmoid)
+- ReLU: g(z) = max(0, z). Sigmoid: g(z) = e^z / (1+e^z)
+- Minimerer RSS(β, ω) via gradient descent — ikke-konveks problem → lokal minimum
+
+### Deskriptiv statistikk — eksamensmønster
+- "Finn lovende prediktorer" → velg plot basert på variabeltyper:
+  - Kontinuerlig Y + kontinuerlig X → **scatterplot**
+  - Kontinuerlig Y + kategorisk X → **boxplot** (Y for hver kategori)
+  - Kategorisk Y + kontinuerlig X → **boxplot** (X for hver kategori)
+  - Kategorisk Y + kategorisk X → **krysstabell** (gjerne normalisert: P(Y|X))
+
 ## Open Questions / Blockers
 - Exercise 2.8 (h): utforsk datasettet fritt og kommenter funn — ikke påbegynt
 - Exercise 3.9 og 3.10 ikke påbegynt
@@ -281,6 +597,29 @@ auto['y'] = auto['y'].astype('category')
 - `Foreleser/Tutorial 3/exercise3.ipynb` — løsning Tutorial 3 — Task 1 og Task 2 ferdig ✅
 - `Foreleser/Tutorial 3/exercise3.pdf` — oppgavetekst Tutorial 3
 - `Foreleser/Tutorial 3/exercise3_solutions.pdf` — forelesers løsningsforslag Tutorial 3
+- `Foreleser/Tutorial 4/exercise4.ipynb` — løsning Tutorial 4 — alle tasks fullført ✅
+- `Foreleser/Tutorial 4/exercise4.pdf` — oppgavetekst Tutorial 4
+- `Foreleser/Tutorial 4/iris.csv` — Iris-datasettet (150 obs, 4 mål + type)
+- `Foreleser/Previous exam - in R/2025/exam_task1.ipynb` — Python-versjon av eksamen 2025, oppgave 1 (student fyller inn)
+- `Foreleser/Previous exam - in R/2025/2025.ipynb` — løsninger til eksamen 2025, oppgave 1
+- `Data for exam/task1_data.csv` — eksamensdata: 5000 obs, x1–x6 + y (ikke-lineært: x2 og x3)
+- `~/Library/Application Support/Positron/User/snippets/BAN404.code-snippets` — Positron-snippets for alle metoder (prefix: ban404, ols, ridge, lasso, logreg, knn, lda, qda, nb, tree, rf, boost, mlp, gam, kmeans, hclust)
+
+## Jupyter → PDF-konvertering
+```bash
+# Enkel konvertering (notebook må være kjørt på forhånd):
+jupyter nbconvert --to pdf "Foreleser/13/ames.ipynb"
+
+# Kjør alle celler automatisk og konverter:
+jupyter nbconvert --to pdf --execute "Foreleser/13/ames.ipynb"
+
+# Alternativ via HTML (sikrere, unngår LaTeX-feil):
+jupyter nbconvert --to html --execute "Foreleser/13/ames.ipynb"
+# Åpne HTML i nettleser → Cmd+P → Save as PDF
+```
+- Alltid oppgi full relativ sti fra BAN404-roten
+- `--execute` kjører cellene under konverteringen (krever ikke lagret output)
+- HTML-ruten anbefales hvis PDF-konverteringen kutter tidlig (LaTeX-feil)
 
 ## Notes
 - Studenten er nybegynner i Python og statistisk læring — foretrekker grundige forklaringer på norsk
@@ -309,6 +648,11 @@ auto['y'] = auto['y'].astype('category')
 - Forstår livssyklus-hypotesen for lønn og hvorfor lineær modell ikke holder for alder-lønn
 - Forstår at np.random.default_rng og np.random.seed bruker ulike RNG-systemer — gir ulik split med samme seed-tall
 - Forstår GAM og backfitting: additiv modell, KNN-smoother, partiell residual, konvergens
+- Forstår Ridge dypt: objektivfunksjon, demeaning, scipy vs analytisk, bias-variance mekanisme
+- Forstår bootstrap: tilbakelegging, samplingsfordeling, persentil-KI, ddof=1
+- Forstår GAM med BSpline: delta R² for å identifisere ikke-linearitet, spline basis, sammenligning MSE
+- Forstår LOO for Ridge: mask-teknikken, g_fast med linalg.solve, subsettstrategi for store n
+- Forstår bias-variance dypt: NHH-analogi (bias=spørre på biblioteket, varians=få studenter)
 - Forstår regresjonstrær: rekursiv binær splitting, RSS-minimering, bladprediksjon, overfitting
 - Forstår pruning: complexity penalty alpha, GridSearchCV for valg av alpha
 - Forstår bagging vs. random forest: bagging bruker alle p prediktorer, RF bruker m < p
